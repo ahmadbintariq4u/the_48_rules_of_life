@@ -1,4 +1,4 @@
-# life_rules
+# The Life
 
 A new Flutter project.
 
