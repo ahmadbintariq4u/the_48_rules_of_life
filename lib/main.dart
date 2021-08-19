@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   int currentTab = 1;
-  PageController _pageController = PageController(initialPage: 0);
+  PageController _pageController = PageController(initialPage: 1);
   final List<Widget> screens = [Favorite(), Home(), Setting()];
   Widget currentScreen = Home();
 
