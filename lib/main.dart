@@ -28,11 +28,9 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'The Life Rules',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData(accentColor: Colors.blueAccent),
         home: Scaffold(
-          appBar: AppBar(title: Text('The Life Rules')),
+          // appBar: AppBar(title: Text('The Life Rules')),
           bottomNavigationBar: CurvedNavigationBar(
             height: 50,
             backgroundColor: Colors.white,
@@ -60,8 +58,9 @@ class MyAppState extends State<MyApp> {
             onTap: (index) {
               setState(() {
                 currentScreen = screens[index];
+                // _pageController.jumpToPage(index);
                 _pageController.animateToPage(index,
-                    duration: Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 300),
                     curve: Curves.linear);
               });
             },
