@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:the_life/favorite.dart';
 import 'package:the_life/home.dart';
+import 'package:the_life/my_clipper.dart';
 import 'package:the_life/setting.dart';
 
 void main() {
@@ -28,12 +29,16 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'The Life Rules',
-        theme: ThemeData(accentColor: Colors.blueAccent),
+        theme: ThemeData(
+          accentColor: Colors.blueAccent,
+          dividerColor: Colors.transparent,
+        ),
         home: Scaffold(
           // appBar: AppBar(title: Text('The Life Rules')),
+
           bottomNavigationBar: CurvedNavigationBar(
             height: 50,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             color: Colors.blueAccent,
             buttonBackgroundColor: Colors.blueAccent,
             items: <Widget>[
@@ -65,18 +70,22 @@ class MyAppState extends State<MyApp> {
               });
             },
           ),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (page) {
-              setState(() {
-                currentTab = page;
-              });
-            },
-            children: [
-              Favorite(),
-              Home(),
-              Setting(),
-            ],
+          body: ClipPath(
+            clipper: MyClipper(),
+            child: PageView(
+              clipBehavior: Clip.antiAlias,
+              controller: _pageController,
+              onPageChanged: (page) {
+                setState(() {
+                  currentTab = page;
+                });
+              },
+              children: [
+                Favorite(),
+                Home(),
+                Setting(),
+              ],
+            ),
           ),
         ));
   }
