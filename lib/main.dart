@@ -1,12 +1,16 @@
 import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:the_life/favorite.dart';
-import 'package:the_life/home.dart';
-import 'package:the_life/my_clipper.dart';
-import 'package:the_life/setting.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:the_life/data/rules_model.dart';
+import 'package:the_life/pages/favorite.dart';
+import 'package:the_life/pages/home.dart';
+import 'package:the_life/pages/setting.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(The48RulesModelAdapter());
   runApp(MyApp());
 }
 
@@ -70,8 +74,8 @@ class MyAppState extends State<MyApp> {
               });
             },
           ),
-          body: ClipPath(
-            clipper: MyClipper(),
+          body: Padding(
+            padding: const EdgeInsets.only(bottom: 12),
             child: PageView(
               clipBehavior: Clip.antiAlias,
               controller: _pageController,
