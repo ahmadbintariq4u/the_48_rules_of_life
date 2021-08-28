@@ -41,7 +41,7 @@ class MyAppState extends State<MyApp> {
           // appBar: AppBar(title: Text('The Life Rules')),
 
           bottomNavigationBar: CurvedNavigationBar(
-            height: 50,
+            height: 500,
             backgroundColor: Colors.transparent,
             color: Colors.blueAccent,
             buttonBackgroundColor: Colors.blueAccent,
