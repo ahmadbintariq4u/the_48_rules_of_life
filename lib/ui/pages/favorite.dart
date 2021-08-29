@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_life/bloc/data.dart';
-import 'package:the_life/data/data.dart';
+import 'package:the_life/bloc/data/data.dart';
 
 class Favorite extends StatefulWidget {
   @override

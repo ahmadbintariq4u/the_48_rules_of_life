@@ -2,10 +2,11 @@ import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:the_life/data/rules_model.dart';
-import 'package:the_life/pages/favorite.dart';
-import 'package:the_life/pages/home.dart';
-import 'package:the_life/pages/setting.dart';
+import 'package:the_life/ui/pages/favorite.dart';
+import 'package:the_life/ui/pages/home.dart';
+import 'package:the_life/ui/pages/setting.dart';
+
+import 'bloc/data/rules_model.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,7 @@ class MyAppState extends State<MyApp> {
           // appBar: AppBar(title: Text('The Life Rules')),
 
           bottomNavigationBar: CurvedNavigationBar(
-            height: 500,
+            height: 50,
             backgroundColor: Colors.transparent,
             color: Colors.blueAccent,
             buttonBackgroundColor: Colors.blueAccent,

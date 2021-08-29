@@ -1,4 +1,4 @@
-import 'package:the_life/data/the_48_rules.dart';
+import 'package:the_life/bloc/data/the_48_rules.dart';
 
 class Data {
   static List<The48Rules> the_48_rules = [
