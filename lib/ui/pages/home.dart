@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:the_life/bloc/data/data.dart';
@@ -21,6 +19,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -137,9 +136,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                       onExpansionChanged: (isExpanded) {
                         setState(() {
                           if (isExpanded)
-                            Data.the_48_rules[index].subtitle = 'Explanation:';
+                            Data.the48Rules[index].subtitle = 'Explanation:';
                           else
-                            Data.the_48_rules[index].subtitle =
+                            Data.the48Rules[index].subtitle =
                                 'Tap for Explanation';
                         });
                       },
@@ -147,14 +146,14 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         padding: const EdgeInsets.all(8.0)
                             .copyWith(top: 4, bottom: 4, left: 0),
                         child: Text(
-                          Data.the_48_rules[index].subtitle,
+                          Data.the48Rules[index].subtitle,
                           style: GoogleFonts.b612(
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.030),
                         ),
                       ),
                       title: Text(
-                        "\"${Data.the_48_rules[index].shortDescription}\"",
+                        "\"${Data.the48Rules[index].shortDescription}\"",
                         style: GoogleFonts.carterOne(
                             fontSize:
                                 MediaQuery.of(context).size.width * 0.045),
@@ -177,7 +176,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                       trailing: IconButton(
                         icon: Icon(
                           Icons.favorite,
-                          color: Data.the_48_rules[index].isFavorite
+                          color: Data.the48Rules[index].isFavorite
                               ? Colors.blue
                               : Colors.black,
                         ),
@@ -193,7 +192,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   Widget testWidget() => SliverToBoxAdapter(
         child: ListView(
-          children: Data.the_48_rules.map((item) {
+          children: Data.the48Rules.map((item) {
             return Container(
               child: Text(item.shortDescription),
             );

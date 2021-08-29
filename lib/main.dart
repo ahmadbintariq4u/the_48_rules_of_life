@@ -1,14 +1,9 @@
-import 'package:animations/animations.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:the_life/ui/components/my_bottom_navigation.dart';
 import 'package:the_life/ui/pages/favorite.dart';
 import 'package:the_life/ui/pages/home.dart';
 import 'package:the_life/ui/pages/setting.dart';
-
 import 'bloc/component_bloc/my_bottom_navigation.dart';
-import 'bloc/data/rules_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,13 +12,13 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return MyAppState();
   }
 }
 
 class MyAppState extends State<MyApp> {
-  PageController _pageController = PageController(initialPage: 1);
+  PageController _pageController =
+      PageController(initialPage: 1, keepPage: true);
   final List<Widget> screens = [Favorite(), Home(), Setting()];
   Widget currentScreen = Home();
 
@@ -37,15 +32,15 @@ class MyAppState extends State<MyApp> {
           dividerColor: Colors.transparent,
         ),
         home: Scaffold(
-          bottomNavigationBar: MyBottomNavigation(),
+          bottomNavigationBar: MyBottomNavigation(navigatePage),
           body: Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: PageView(
-              clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              physics: BouncingScrollPhysics(),
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() {
-                  print('change${index}');
                   MyBottomNavigationBLoC.myBottomNavigationBloc.getIndexSink
                       .add(index);
                 });
@@ -58,5 +53,10 @@ class MyAppState extends State<MyApp> {
             ),
           ),
         ));
+  }
+
+  void navigatePage(index) {
+    _pageController.animateToPage(index,
+        duration: Duration(milliseconds: 350), curve: Curves.ease);
   }
 }
