@@ -1,7 +1,7 @@
-import 'package:the_life/data/the_48_rules.dart';
+import 'package:the_life/model/the_48_rules.dart';
 
 class Data {
-  static List<The48Rules> the_48_rules = [
+  static var the48Rules = [
     The48Rules('Never Outshine the master.', isFavorite: true),
     The48Rules(
         'Never put too much trust in your friends. Learn how to use enemies.'),
