@@ -7,7 +7,10 @@ import 'package:the_life/view/setting.dart';
 import 'controller/main_page_controller.dart';
 
 void main() {
-  runApp(GetMaterialApp(home: MainHome()));
+  runApp(GetMaterialApp(
+    home: MainHome(),
+    theme: ThemeData.light(),
+  ));
 }
 
 class MainHome extends StatelessWidget {
@@ -38,26 +41,3 @@ class MainHome extends StatelessWidget {
 
   void navigatePage(index) {}
 }
-
-
-// class MyAppState extends State<MyApp> {
-
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         title: 'The Life Rules',
-//         theme: ThemeData(
-//           accentColor: Colors.blueAccent,
-//           dividerColor: Colors.transparent,
-//         ),
-//         home: );
-//   }
-
-//   void navigatePage(index) {
-//     _pageController.animateToPage(index,
-//         duration: Duration(milliseconds: 350), curve: Curves.ease);
-//   }
-// }
