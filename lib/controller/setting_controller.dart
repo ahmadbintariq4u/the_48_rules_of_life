@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:rive/rive.dart';
 
 class SettingController extends GetxController {
-  var _darkModeStatus = false.obs;
+  var _isDarkMode = false.obs;
   setDarkModeStatus(status) {
-    _darkModeStatus.value = status;
+    _isDarkMode.value = status;
   }
 
-  bool get getDarkModeStatus => _darkModeStatus.value;
+  bool get getDarkModeStatus => _isDarkMode.value;
 }
