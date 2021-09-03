@@ -10,6 +10,8 @@ void main() {
   runApp(GetMaterialApp(
     home: MainHome(),
     theme: ThemeData.light(),
+    themeMode: ThemeMode.light,
+    darkTheme: ThemeData.dark(),
   ));
 }
 
@@ -38,6 +40,4 @@ class MainHome extends StatelessWidget {
       ),
     );
   }
-
-  void navigatePage(index) {}
 }
