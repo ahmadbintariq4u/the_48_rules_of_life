@@ -23,7 +23,7 @@ class _SettingState extends State<Setting> with AutomaticKeepAliveClientMixin {
   void initState() {
     super.initState();
 
-    rootBundle.load('animations/dark_mode_animation.riv').then((data) {
+    rootBundle.load('animations/dark_light_mode.riv').then((data) {
       final file = RiveFile.import(data);
       final artboard = file.mainArtboard;
       var controller = StateMachineController.fromArtboard(
@@ -72,11 +72,29 @@ class _SettingState extends State<Setting> with AutomaticKeepAliveClientMixin {
   SliverFillRemaining myRemainingSpace() => SliverFillRemaining(
       hasScrollBody: false,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          /// Tile_1
+          // Tile_1
+          _playButtonArtboard == null
+              ? FlutterLogo()
+              : Container(
+                  height: 240,
+                  width: 380,
+                  alignment: Alignment.center,
+                  child: Rive(
+                    useArtboardSize: true,
+                    alignment: Alignment.center,
+                    antialiasing: true,
+                    artboard: _playButtonArtboard!,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+
+          /// Tile_2
           ListTile(
+            minLeadingWidth: 10,
             leading: Icon(Icons.lightbulb),
-            horizontalTitleGap: 0.5,
+            horizontalTitleGap: 10,
             title: Text('Appearance',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -84,7 +102,6 @@ class _SettingState extends State<Setting> with AutomaticKeepAliveClientMixin {
                     fontFamily: 'forte')),
           ),
 
-          /// Tile_2
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: ListTile(
@@ -97,14 +114,16 @@ class _SettingState extends State<Setting> with AutomaticKeepAliveClientMixin {
                   return Switch(
                     value: controller.getDarkModeStatus,
                     onChanged: (value) {
-                      if (Get.isDarkMode) {
-                        Get.changeThemeMode(ThemeMode.light);
-                        controller.setDarkModeStatus(value);
-                        _darkLightModeAnimation(true);
+                      if (!value) {
+                        if (Get.isDarkMode) {
+                          Get.changeThemeMode(ThemeMode.light);
+                          controller.setDarkModeStatus(value);
+                          _darkLightModeAnimation();
+                        }
                       } else {
                         Get.changeThemeMode(ThemeMode.dark);
                         controller.setDarkModeStatus(value);
-                        _darkLightModeAnimation(false);
+                        _darkLightModeAnimation();
                       }
 
                       // Get.changeTheme(ThemeData.dark());
@@ -116,23 +135,64 @@ class _SettingState extends State<Setting> with AutomaticKeepAliveClientMixin {
           ),
 
           /// Tile_3
-          SizedBox(
-              height: 200,
-              width: 200,
-              child: _playButtonArtboard == null
-                  ? FlutterLogo()
-                  : SizedBox(
-                      height: 500,
-                      width: 500,
-                      child: Rive(
-                        artboard: _playButtonArtboard!,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+          ListTile(
+            minLeadingWidth: 10,
+            leading: Icon(Icons.notifications),
+            horizontalTitleGap: 10,
+            title: Text('Notifications',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: 'forte')),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: ListTile(
+              title: Text('Local Notifications'),
+              trailing: GetX<SettingController>(
+                init: SettingController(),
+                initState: (_) {},
+                builder: (controller) {
+                  return Switch(
+                    value: controller.getDarkModeStatus,
+                    onChanged: (value) {
+                      if (!value) {
+                        if (Get.isDarkMode) {
+                          Get.changeThemeMode(ThemeMode.light);
+                          controller.setDarkModeStatus(value);
+                          _darkLightModeAnimation();
+                        }
+                      } else {
+                        Get.changeThemeMode(ThemeMode.dark);
+                        controller.setDarkModeStatus(value);
+                        _darkLightModeAnimation();
+                      }
+
+                      // Get.changeTheme(ThemeData.dark());
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+
+          /// Tile_4
+          Divider(
+            indent: 20,
+            endIndent: 20,
+            height: 4,
+          ),
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Text('VERSION 1.0'),
+          ))
+          // Image.asset('assets/icon.png')
         ],
       ));
 
-  void _darkLightModeAnimation(isDarkMode) {
+  void _darkLightModeAnimation() {
     _isDarkModeInput?.controller.isActive = false;
 
     if (_isDarkModeInput?.value == false &&
